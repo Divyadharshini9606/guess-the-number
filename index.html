@@ -1,0 +1,299 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Page title -->
+  <title>GuessQuest - Free Online Number Guessing Game</title>
+
+  <!-- SEO description -->
+  <meta name="description"
+    content="Play GuessQuest, a free online number guessing game. Choose easy, medium, or hard mode, use hints, beat challenges, and improve your score.">
+
+  <!-- Tell search engines they can index this page -->
+  <meta name="robots" content="index, follow">
+
+  <!-- Website author -->
+  <meta name="author" content="Your Name">
+
+  <!-- Social media preview -->
+  <meta property="og:title"
+    content="GuessQuest - Number Guessing Game">
+  <meta property="og:description"
+    content="Guess the secret number, use helpful hints, and beat your best score in this free online game.">
+  <meta property="og:type" content="website">
+
+  <!-- CSS and JavaScript -->
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <main class="game-container">
+    <header class="top-bar">
+      <a class="brand" href="#" aria-label="GuessQuest home">
+        <span class="brand-icon">✦</span> GuessQuest
+      </a>
+      <span class="status"><span class="status-dot"></span> Ready to play</span>
+    </header>
+
+    <section class="hero">
+      <div class="eyebrow">THE DAILY BRAIN CHALLENGE</div>
+      <h1>Can you crack<br>the <span>secret number?</span></h1>
+      <p class="subtitle">
+        Follow the clues, trust your instincts, and find the hidden number.
+      </p>
+    </section>
+
+    <section class="game-card">
+      <div class="card-heading">
+        <div>
+          <p class="section-label">YOUR CHALLENGE</p>
+          <h2>Guess the number</h2>
+        </div>
+        
+<button
+  type="button"
+  class="secret-icon"
+  id="helpButton"
+  aria-label="How to play"
+  title="How to play"
+>
+  ?
+</button>
+
+      </div>
+
+      <div class="difficulty-section">
+        <label for="difficulty">DIFFICULTY LEVEL</label>
+        <select id="difficulty">
+          <option value="easy">Easy · 1–50</option>
+          <option value="medium" selected>Medium · 1–100</option>
+          <option value="hard">Hard · 1–500</option>
+        </select>
+      </div>
+
+      <div class="range-info">
+        <span>NUMBER RANGE</span>
+        <strong id="rangeText">01 — 100</strong>
+      </div>
+
+      <form id="guessForm">
+        <label for="guessInput" class="input-label">Enter your guess</label>
+        <div class="input-row">
+          <input
+            type="number"
+            id="guessInput"
+            placeholder="e.g. 42"
+            min="1"
+            max="100"
+            autocomplete="off"
+            required
+          >
+          <button type="submit" id="guessButton">Guess ↗</button>
+        </div>
+      </form>
+
+      <div id="feedback" class="feedback" role="status" aria-live="polite">
+        <span class="feedback-icon">✦</span>
+        <span id="feedbackText">Make your first guess to begin!</span>
+      </div>
+
+      <div class="attempt-heading">
+        <span>ATTEMPTS USED</span>
+        <strong id="attemptText">0 / 10</strong>
+      </div>
+
+      <div class="progress-track">
+        <div id="progressBar" class="progress-bar"></div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-box">
+          <span class="stat-icon">🎯</span>
+          <p>Guesses</p>
+          <strong id="guessCount">0</strong>
+        </div>
+        <div class="stat-box">
+          <span class="stat-icon">⭐</span>
+          <p>Current score</p>
+          <strong id="score">0</strong>
+        </div>
+        <div class="stat-box">
+          <span class="stat-icon">🏆</span>
+          <p>Best score</p>
+          <strong id="bestScore">0</strong>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button type="button" id="newGameButton" class="secondary-button">
+          ↻ New game
+        </button>
+        <button type="button" id="hintButton" class="hint-button">
+          ✨ Get a hint
+        </button>
+      </div>
+
+      <section class="history-section">
+        <div class="history-heading">
+          <h3>Guess history</h3>
+          <span id="historyCount">0 guesses</span>
+        </div>
+        <div id="history" class="history-list">
+          <p class="empty-history">Your guesses will appear here.</p>
+        </div>
+      </section>
+    </section>
+
+
+    
+<!-- Game introduction for visitors and search engines -->
+<section class="intro-section">
+  <h2>About GuessQuest</h2>
+
+  <p>
+    GuessQuest is a free online number guessing game built using
+    HTML, CSS, and JavaScript. Your goal is to discover the secret
+    number using helpful clues before you run out of attempts.
+  </p>
+
+  <h3>How to play</h3>
+
+  <p>
+    Choose your difficulty level and enter a number within the
+    displayed range. If your guess is too high or too low, the game
+    gives you a hint. Use the clues carefully to find the correct
+    answer and earn points.
+  </p>
+
+  <h3>Game features</h3>
+
+  <ul>
+    <li>Three difficulty levels: Easy, Medium, and Hard.</li>
+    <li>Helpful hints and guess history.</li>
+    <li>Score tracking and saved personal best.</li>
+    <li>Responsive design for desktop and mobile devices.</li>
+  </ul>
+</section>
+
+    
+
+    <footer>
+      <p>Made for curious minds <span>✦</span> Keep learning, keep guessing.</p>
+    </footer>
+    
+<!-- How to Play Modal -->
+<div class="modal-overlay" id="helpModal" hidden>
+  <section
+    class="help-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="helpTitle"
+  >
+    <div class="modal-header">
+      <div>
+        <p class="section-label">GAME GUIDE</p>
+        <h2 id="helpTitle">How to play</h2>
+      </div>
+
+      <button
+        type="button"
+        class="close-modal"
+        id="closeHelpButton"
+        aria-label="Close instructions"
+      >
+        &times;
+      </button>
+    </div>
+
+    <p class="help-description">
+      A secret number is waiting for you. Can you find it before you run
+      out of attempts?
+    </p>
+
+    <div class="help-item">
+      <span class="help-icon">🎯</span>
+      <div>
+        <h3>1. Make a guess</h3>
+        <p>Enter a whole number within the displayed range and press Guess.</p>
+      </div>
+    </div>
+
+    <div class="help-item">
+      <span class="help-icon">💡</span>
+      <div>
+        <h3>2. Follow the clues</h3>
+        <p>Too high means guess lower. Too low means guess higher.</p>
+      </div>
+    </div>
+
+    <div class="help-item">
+      <span class="help-icon">✨</span>
+      <div>
+        <h3>3. Use your hint</h3>
+        <p>Get one hint per round to narrow down the possible number.</p>
+      </div>
+    </div>
+
+    <div class="help-item">
+      <span class="help-icon">🏆</span>
+      <div>
+        <h3>4. Earn points</h3>
+        <p>Harder levels offer more base points. Fewer guesses mean a bigger bonus.</p>
+      </div>
+    </div>
+
+    <div class="difficulty-guide">
+      <h3>Choose your difficulty</h3>
+      <div><span>🟢 Easy</span><strong>1–50 · 10 attempts</strong></div>
+      <div><span>🔵 Medium</span><strong>1–100 · 10 attempts</strong></div>
+      <div><span>🟣 Hard</span><strong>1–500 · 12 attempts</strong></div>
+    </div>
+
+    <button type="button" class="play-button" id="gotItButton">
+      Got it, let's play! ↗
+    </button>
+  </section>
+</div>
+
+  </main>
+</body>
+</html>
+
+
+
+
+
+<!-- Game introduction for visitors and search engines 
+<section class="intro-section">
+  <h2>About GuessQuest</h2>
+
+  <p>
+    GuessQuest is a free online number guessing game built using
+    HTML, CSS, and JavaScript. Your goal is to discover the secret
+    number using helpful clues before you run out of attempts.
+  </p>
+
+  <h3>How to play</h3>
+
+  <p>
+    Choose your difficulty level and enter a number within the
+    displayed range. If your guess is too high or too low, the game
+    gives you a hint. Use the clues carefully to find the correct
+    answer and earn points.
+  </p>
+
+  <h3>Game features</h3>
+
+  <ul>
+    <li>Three difficulty levels: Easy, Medium, and Hard.</li>
+    <li>Helpful hints and guess history.</li>
+    <li>Score tracking and saved personal best.</li>
+    <li>Responsive design for desktop and mobile devices.</li>
+  </ul>
+</section>
+-->
