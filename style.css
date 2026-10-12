@@ -685,3 +685,35 @@ footer span {
   }
 }
 
+/* SEO introduction section */
+.intro-section {
+  margin-top: 24px;
+  padding: 25px;
+  background: #131b30;
+  border: 1px solid #29344e;
+  border-radius: 18px;
+  color: #dce3f7;
+}
+
+.intro-section h2 {
+  margin-bottom: 15px;
+  font-size: 21px;
+}
+
+.intro-section h3 {
+  margin: 20px 0 10px;
+  font-size: 14px;
+  color: #a58aff;
+}
+
+.intro-section p,
+.intro-section li {
+  color: #a5b2ce;
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+.intro-section ul {
+  padding-left: 20px;
+}
+
